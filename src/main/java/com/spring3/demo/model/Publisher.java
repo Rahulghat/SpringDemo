@@ -1,5 +1,6 @@
 package com.spring3.demo.model;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -22,7 +23,7 @@ public class Publisher {
 	private String state;
 	private int zip;
 	@OneToMany(mappedBy = "publisher")
-	private Set<Book> book;
+	private Set<Book> book = new HashSet<Book>();
 
 	public Set<Book> getBook() {
 		return book;

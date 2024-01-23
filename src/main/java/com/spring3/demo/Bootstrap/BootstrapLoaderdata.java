@@ -3,79 +3,74 @@ package com.spring3.demo.Bootstrap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.spring3.demo.entity.Author;
-import com.spring3.demo.entity.Book;
+import com.spring3.demo.model.Author;
+import com.spring3.demo.model.Book;
 import com.spring3.demo.model.Publisher;
+import com.spring3.demo.repository.AuthorRepository;
+import com.spring3.demo.repository.BookRepository;
 import com.spring3.demo.repository.PublisherReportsitory;
+
 @Component
 public class BootstrapLoaderdata implements CommandLineRunner {
 
 	private PublisherReportsitory publisherReportsitory;
+	private BookRepository bookRepository;
+	private AuthorRepository authorRepository;
 
-	public BootstrapLoaderdata(PublisherReportsitory publisherReportsitory) {
+	public BootstrapLoaderdata(PublisherReportsitory publisherReportsitory, BookRepository bookRepository,
+			AuthorRepository authorRepository) {
 		super();
 		this.publisherReportsitory = publisherReportsitory;
+		this.bookRepository = bookRepository;
+		this.authorRepository = authorRepository;
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 
+		Author author1 = new Author();
+		author1.setFirstName("first");
+		author1.setLastName("last name1");
 
-		Book nooneBook = new Book();
-		nooneBook.setIsdn("1234");
-		nooneBook.setName("Thinking in java ");
+		Book book1 = new Book();
+		book1.setIsdn("123");
+		book1.setName("book1");
 
-		Book saveBook1 = bookRepository.save(nooneBook);
+		Author author2 = new Author();
+		author2.setFirstName("second");
+		author2.setLastName("last name2");
 
-		Author nooneAuthor = new Author();
-		nooneAuthor.setFirstName("eric");
-		nooneAuthor.setLastName("Bano");
+		Book book2 = new Book();
+		book2.setIsdn("123");
+		book2.setName("book2");
 
-		Author saveauthor1 = authorRepository.save(nooneAuthor);
+		Book savebook1 = bookRepository.save(book1);
+		Book savebook2 = bookRepository.save(book2);
+		Author savedAuthor1 = authorRepository.save(author1);
+		Author savedAuthor2 = authorRepository.save(author2);
 
-		Book notwoBook = new Book();
-		notwoBook.setIsdn("11234");
-		notwoBook.setName("Thinking in eclipse ");
+		savebook1.getAuthors().add(savedAuthor1);
+		savedAuthor1.getBooks().add(savebook1);
 
-		Book saveBook2 = bookRepository.save(notwoBook);
+		savebook2.getAuthors().add(savedAuthor2);
+		savebook2.getAuthors().add(savedAuthor1);
+		savedAuthor2.getBooks().add(savebook2);
 
-		Author notwoAuthor = new Author();
-		notwoAuthor.setFirstName("eric");
-		notwoAuthor.setLastName("Bano");
-		authorRepository.save(notwoAuthor);
+		Publisher publisher = new Publisher();
+		publisher.setPublisherName("My Publisher");
+		publisher.setAddress("123 Main");
+		Publisher savedPublisher = publisherReportsitory.save(publisher);
 
-		notwoAuthor.getBooks().add(saveBook2);
-		saveBook2.getAuthors().add(notwoAuthor);
-		authorRepository.save(notwoAuthor);
-		bookRepository.save(saveBook2);
-		
+		savebook1.setPublisher(savedPublisher);
+		savebook2.setPublisher(savedPublisher);
 
-		System.out.println("book count " + bookRepository.count());
-		System.out.println("author count " + authorRepository.count());
+		// authorRepository.save(savedAuthor1);
+		bookRepository.save(savebook1);
+		bookRepository.save(savebook2);
 
-		
-		
-		
-		/*
-		Publisher myPublisher1 = new Publisher();
-		myPublisher1.setAddress("XYZ");
-		myPublisher1.setCity("Mumbai");
-		myPublisher1.setPublisherName("Test");
-		myPublisher1.setState("Maharastra");
-		myPublisher1.setZip(410210);
-
-		Publisher myPublisher2 = new Publisher();
-		myPublisher2.setAddress("XYZX");
-		myPublisher2.setCity("Mumbai");
-		myPublisher2.setPublisherName("Test");
-		myPublisher2.setState("Maharastra");
-		myPublisher2.setZip(410210);
-
-		publisherReportsitory.save(myPublisher1);
-		publisherReportsitory.save(myPublisher2);
-		*/
-
-		System.out.println("total publisher :" + publisherReportsitory.count());
+		System.out.println("Books:" + bookRepository.count());
+		System.out.println("Authors :" + authorRepository.count());
+		System.out.println("publisher :" + publisherReportsitory.count());
 
 	}
 
