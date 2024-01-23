@@ -19,11 +19,11 @@ public class BookController {
 	}
 
 	@RequestMapping("/books")
-	public String getBook(Model model, String attributeName) {
+	public String getBook(Model model) {
 
 		model.addAttribute(bookService.findAll());
 
-		return "books ";
+		return "/books.html";
 
 	}
 
