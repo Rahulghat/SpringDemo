@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.spring3.demo.model.Book;
 import com.spring3.demo.service.BookService;
 
 @Controller
@@ -21,9 +22,11 @@ public class BookController {
 	@RequestMapping("/books")
 	public String getBook(Model model) {
 
-		model.addAttribute(bookService.findAll());
+		Iterable<Book> books = bookService.findAll();
 
-		return "/books.html";
+		 model.addAttribute("books",books);
+
+		return "books";
 
 	}
 
