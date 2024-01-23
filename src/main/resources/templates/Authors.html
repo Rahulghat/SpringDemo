@@ -31,17 +31,14 @@
 	<table>
 		<tr>
 			<th>Id</th>
-			<th>Book name</th>
-			<th>isdn</th>
-			<th>publisherName</th>
+			<th>firstName</th>
+			<th>Lastname</th>
 
 		</tr>
-		<tr th:each="book : ${books}">
-			<td th:text="${book.id}"></td>
-			<td th:text="${book.name}"></td>
-			<td th:text="${book.isdn}"></td>
-			<td th:text="${book.publisher.publisherName}"></td>
-
+		<tr th:each="author : ${authors}">
+			<td th:text="${author.id}"></td>
+			<td th:text="${author.firstName}"></td>
+			<td th:text="${author.lastName}"></td>
 		</tr>
 
 </body>

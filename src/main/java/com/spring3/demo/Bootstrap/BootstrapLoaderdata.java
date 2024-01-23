@@ -62,6 +62,7 @@ public class BootstrapLoaderdata implements CommandLineRunner {
 		Publisher savedPublisher = publisherReportsitory.save(publisher);
 
 		savebook1.setPublisher(savedPublisher);
+
 		savebook2.setPublisher(savedPublisher);
 
 		// authorRepository.save(savedAuthor1);

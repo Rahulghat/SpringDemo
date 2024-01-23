@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.spring3.demo.model.Book;
 
-@Service
 public interface BookService {
 
 	public Iterable<Book> findAll();

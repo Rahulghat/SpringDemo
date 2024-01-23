@@ -2,19 +2,17 @@ package com.spring3.demo.service.impl;
 
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.spring3.demo.model.Book;
 import com.spring3.demo.repository.BookRepository;
 import com.spring3.demo.service.BookService;
 
-@Component
+@Service
 public class BookServiceImpl implements BookService {
 
 	private final BookRepository bookRepository;
 
-	@Autowired
 	public BookServiceImpl(BookRepository bookRepository) {
 		super();
 		this.bookRepository = bookRepository;

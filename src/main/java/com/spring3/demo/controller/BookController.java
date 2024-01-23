@@ -13,7 +13,6 @@ public class BookController {
 
 	private final BookService bookService;
 
-	@Autowired
 	public BookController(BookService bookService) {
 		super();
 		this.bookService = bookService;
@@ -24,7 +23,7 @@ public class BookController {
 
 		Iterable<Book> books = bookService.findAll();
 
-		 model.addAttribute("books",books);
+		model.addAttribute("books", books);
 
 		return "books";
 
